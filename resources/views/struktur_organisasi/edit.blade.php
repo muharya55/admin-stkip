@@ -57,16 +57,10 @@
                         @endcomponent
 
                         @component('components.fileinput', ['label' => 'Gambar','value' => $data->gambar,'name' => 'gambar','accept' => 'image/*','col' => 'col-md-5'
-                        ])@endcomponent
- @component('components.select',['label'=>'Pimpinan',"type"=>"obj",'key1'=>'id','key2'=>'nama','key3'=>'jabatan','col'=>'col-lg-8 col-sm-6',"placeholder"=>"Pilih pimpinan", "options"=>$pimpinan])
-                        @endcomponent
-
-                        {{-- @component('components.selectInput', ['label' => 'Single','name' => 'single','options' => ['Y' => 'Ya', 'N' => 'Tidak'],'selected' => $data->single
-                        ])@endcomponent --}}
-                       @include('components.checkbox', ['text' => "Single",'value' => $data->single,  "checked"=>false])               
-
-                        @component('components.textInput', ['label' => 'Urutan','value' => $data->order,'name' => 'order'
                         ])@endcomponent 
+ 
+                        @component('components.textInput',['label'=>'Kategori','value' => $data->kategori ]) @endcomponent
+
                         <button type="submit" class="btn btn-primary">
                            Simpan
                         </button>
