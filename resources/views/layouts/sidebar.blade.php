@@ -98,6 +98,30 @@
                         <span class="item-name">Biro</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('prodi*') ? 'active' : '' }}" aria-current="page" href="/prodi">
+                        @include('icons.user-icon')
+                        <span class="item-name">Prodi</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('fakultas*') ? 'active' : '' }}" aria-current="page" href="/fakultas">
+                        @include('icons.user-icon')
+                        <span class="item-name">Fakultas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('kalender-akademik*') ? 'active' : '' }}" aria-current="page" href="/kalender-akademik">
+                        @include('icons.user-icon')
+                        <span class="item-name">Kalender Akademik</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('download*') ? 'active' : '' }}" aria-current="page" href="/download">
+                        @include('icons.user-icon')
+                        <span class="item-name">Download</span>
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link {{ Request::is('kelas') ? 'active' : '' }}" aria-current="page" href="/kelas">
                         @include('icons.house-icon')

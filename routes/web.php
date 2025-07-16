@@ -3,10 +3,14 @@
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BiroController;
+use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KalenderAkademikController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\StrukturOrganisasiController; 
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +38,12 @@ Route::middleware('auth')->group(
         Route::resource('/struktur-organisasi', StrukturOrganisasiController::class);
         Route::resource('/galeri', GaleriController::class);
         Route::resource('/biro', BiroController::class);
+        Route::resource('/prodi', ProdiController::class);
+        Route::resource('/fakultas', FakultasController::class);
+        Route::resource('/kalender-akademik', KalenderAkademikController::class);
+        
+        Route::resource('/download', DownloadController::class);
+        // Route::get('documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');
         // Route::get('/download/{filename}', [SiswaController::class, 'downloadFormatUpload']);
     }
 );

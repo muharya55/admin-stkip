@@ -6,15 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('download', function (Blueprint $table) {
+        Schema::create('utilities', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->string('nama_file');  
-            $table->string('ekstensi', 10);  
-            $table->decimal('ukuran_kb', 10, 2);  
-            $table->date('tanggal_upload');
+            $table->string('slug')->nullable();
+            $table->longText('data')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
@@ -23,9 +23,11 @@ return new class extends Migration
         });
     }
 
-     
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('downloads');
+        Schema::dropIfExists('utilities');
     }
 };

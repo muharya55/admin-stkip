@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Biro;
+use App\Models\Fakultas;
+use App\Models\Jurusan;
 use App\Models\StrukturOrganisasi;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class BiroController extends Controller
+class FakultasController extends Controller
 {
-    protected $view = 'biro';
+    protected $view = 'fakultas';
     public function index()
     {
         $view =$this->view ;
-        $datas = Biro::filter(request()->only(['search']))
+        $datas = Fakultas::filter(request()->only(['search']))
             ->orderBy('created_at', 'desc')
             ->paginate(10) // Paginate the results
             ->appends(request()->query());
@@ -32,35 +34,25 @@ class BiroController extends Controller
     public function update(Request $request, $id)
     {
         $view =$this->view ;
-        $artikel = Biro::where('id', $id)->first();
+        $artikel = Fakultas::where('id', $id)->first();
 
         $request->validate([
             'nama' => 'nullable|string|max:255',
-            'nama_pimpinan' => 'nullable|string|max:255',
-            'gambar_pimpinan' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'email_pimpinan' => 'nullable|email|max:255',
-            'content' => 'nullable|string',
+            'singkatan' => 'nullable|string|max:255',
+            'program' => 'nullable|string|max:255'
         ]);
 
 
-        $uniqueName = generateRandomString() . '.' . $request->nama_pimpinan;
         $data = $request->all();
-
-        $imagePath = $request->file('gambar_pimpinan') ? 
-                $request->file('gambar_pimpinan')->store("photos/$view/".$uniqueName, 'public') 
-                : $artikel->gambar_pimpinan;        
-        $slug = $this->generateSlug($request->nama);
-        $data['slug'] = $slug;
-        $data['gambar_pimpinan'] = $imagePath;  
-        
+ 
         $artikel->update($data);
-         return redirect()->route("$view.index")->with(['success' => 'Data Berhasil Di Edit!']);
+        return redirect()->route("$view.index")->with(['success' => 'Data Berhasil Di Edit!']);
 
      }
     public function edit($id)
     {
         $view =$this->view ;
-        $data = Biro::find($id);
+        $data = Fakultas::find($id);
         return view("$view.edit", [
             "data" => $data,
         ]);
@@ -69,29 +61,19 @@ class BiroController extends Controller
     {
         // dd($request->all());
 
-      $view =$this->view ;
+        $view =$this->view ;
 
         $request->validate([
             'nama' => 'nullable|string|max:255',
-            'nama_pimpinan' => 'nullable|string|max:255',
-            'gambar_pimpinan' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'email_pimpinan' => 'nullable|email|max:255',
-            'content' => 'nullable|string',
+            'singkatan' => 'nullable|string|max:255',
+            'program' => 'nullable|string|max:255'
         ]);
-        
-        $uniqueName = generateRandomString() . '.' . $request->nama_pimpinan;
-        $slug = $this->generateSlug($request->nama);
+ 
         $data = $request->all();
-        $data['slug'] = $slug;
 
-        $imagePath = $request->file('gambar_pimpinan') ? 
-                $request->file('gambar_pimpinan')->store("photos/$view/".$uniqueName, 'public') 
-                : $request->gambar_pimpinan;
-        $data['gambar_pimpinan'] = $imagePath;  
-
+         
         try {
-            Biro::create($data);
-           
+            Fakultas::create($data);
         } catch (Exception $e) {
             dd($e);
         }
@@ -101,7 +83,7 @@ class BiroController extends Controller
     public function destroy(Request $request, $id)
     {
         $view =$this->view ;
-        $item = Biro::findOrFail($id);
+        $item = Fakultas::findOrFail($id);
 
         $item->delete();
 
