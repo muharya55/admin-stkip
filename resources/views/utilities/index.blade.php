@@ -42,7 +42,7 @@
                                 <tr>
                                       <th>No</th>
                                       <th>Nama </th>
-                                      <th>Data </th>
+                                      {{-- <th>Data </th> --}}
                                       <th>Aksi</th>
                                 </tr> 
                              </thead>
@@ -55,7 +55,7 @@
                                     <td class="sorting_1">{{ $no++ }}</td>
                                     
                                     <td class="text-wrap" style="max-width: 700px;">{{ $item->slug }} </td>
-                                    <td class="text-wrap" style="max-width: 700px;">{{ $item->data }} </td>
+                                    {{-- <td class="text-wrap" style="max-width: 700px;">{{ $item->data }} </td> --}}
                                     
                                     <td class="text-center d-flex">
                                       <a href="{{ route('utilities.edit', $item->id) }}" data-bs-toggle="tooltip" title="Edit" class="p-2"><i class="fa fa-edit text-primary "></i></a>
