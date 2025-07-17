@@ -92,7 +92,7 @@ class DownloadController extends Controller
     {
         $view =$this->view ;
         $request->validate([
-            'judul' => 'required|string|max:255',
+          'judul' => 'required|string|max:255',
           'file' => 'required|file|mimes:pdf,doc,docx,xlsx,jpg,jpeg,png|max:5120', // max 5MB
         ]); 
         

@@ -3,17 +3,18 @@
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BiroController;
+use App\Http\Controllers\BukuPanduanController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KalenderAkademikController;
-use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route; 
-use App\Http\Controllers\StrukturOrganisasiController; 
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\StrukturOrganisasiController;
+use App\Http\Controllers\UtilitiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,9 @@ Route::middleware('auth')->group(
         Route::resource('/prodi', ProdiController::class);
         Route::resource('/fakultas', FakultasController::class);
         Route::resource('/kalender-akademik', KalenderAkademikController::class);
+        Route::resource('/buku-panduan', BukuPanduanController::class);
+        Route::resource('/utilities', UtilitiesController::class);
+        Route::resource('/contact', ContactController::class);
         
         Route::resource('/download', DownloadController::class);
         // Route::get('documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');

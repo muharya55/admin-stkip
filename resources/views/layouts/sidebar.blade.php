@@ -54,8 +54,7 @@
     </div>
     <div class="sidebar-body pt-0 data-scrollbar">
         <div class="sidebar-list">
-            <!-- Sidebar Menu Start -->
-            <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
+            <ul class="navbar-nav iq-main-menu" id="sidebar-menu" style="overflow-y: auto ; height : 26rem">
                 <li class="nav-item static-item">
                     <a class="nav-link static-item disabled" href="#" tabindex="-1">
                         <span class="default-icon">Master</span>
@@ -120,6 +119,24 @@
                     <a class="nav-link {{ Request::is('download*') ? 'active' : '' }}" aria-current="page" href="/download">
                         @include('icons.user-icon')
                         <span class="item-name">Download</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('buku-panduan*') ? 'active' : '' }}" aria-current="page" href="/buku-panduan">
+                        @include('icons.user-icon')
+                        <span class="item-name">Buku Panduan</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('utilities*') ? 'active' : '' }}" aria-current="page" href="/utilities">
+                        @include('icons.user-icon')
+                        <span class="item-name">Utilities</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('contact*') ? 'active' : '' }}" aria-current="page" href="/contact">
+                        @include('icons.user-icon')
+                        <span class="item-name">Contact</span>
                     </a>
                 </li>
                 {{-- <li class="nav-item">
