@@ -51,7 +51,7 @@
                         @csrf
                         @method('PATCH')
                         @component('components.textInput',['label'=>'Slug ' ,'disabled'=>true,'name'=>'slug','value'=>$data->slug ]) @endcomponent
-                        @component('components.textArea',['label'=>'Data' ,'name'=>'data','id'=>'editor'  ]) @endcomponent
+                        @component('components.textArea',['label'=>'Data' ,'name'=>'data','id'=>'editor','value'=>$data->data  ]) @endcomponent
 
                         <button type="submit" class="btn btn-primary">
                            Simpan
