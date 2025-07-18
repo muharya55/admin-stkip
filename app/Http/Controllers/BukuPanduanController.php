@@ -31,28 +31,42 @@ class BukuPanduanController extends Controller
     {   
         return Str::slug($judul, '-');
     }
-    public function update(Request $request, $id)
-    { 
-        $view =$this->view ;
-        $artikel = BukuPanduan::where('id', $id)->first();
+   public function update(Request $request, $id)
+    {
+        $view = $this->view;
+        $artikel = BukuPanduan::where('id', $id)->firstOrFail();
+
         $validated = $request->validate([
-            'nama' => 'nullable|string|max:255', 
-            'tahun' => 'nullable|max:4', 
-            // 'tahun' => ['required','digits:4','regex:/^\d{4}$/'],
-            'nama_file' => 'required|file|mimes:pdf,doc,docx,xlsx,jpg,jpeg,png|max:5120',
+            'nama' => 'nullable|string|max:255',
+            'tahun' => 'nullable|max:4',
+            'nama_file' => 'nullable|file|mimes:pdf,doc,docx,xlsx,jpg,jpeg,png|max:5120',
         ]);
-        $file = $request->file('nama_file');
-        $ekstensi = $file->getClientOriginalExtension();
-        $namaUnik = uniqid() . '.' . $ekstensi;
 
-        $file->storeAs('public/buku_panduan', $namaUnik);
+        $updateData = [];
 
-        $validated['nama_file'] = $namaUnik;
+        if (!is_null($validated['nama'] ?? null)) {
+            $updateData['nama'] = $validated['nama'];
+        }
 
-        $artikel->update($validated);
+        if (!is_null($validated['tahun'] ?? null)) {
+            $updateData['tahun'] = $validated['tahun'];
+        }
+
+        if ($request->hasFile('nama_file')) {
+            $file = $request->file('nama_file');
+            $ekstensi = $file->getClientOriginalExtension();
+            $namaUnik = uniqid() . '.' . $ekstensi;
+            $file->storeAs('public/buku_panduan', $namaUnik);
+            $updateData['nama_file'] = $namaUnik;
+        }
+
+        if (!empty($updateData)) {
+            $artikel->update($updateData);
+        }
+
         return redirect()->route("buku-panduan.index")->with(['success' => 'Data Berhasil Di Edit!']);
+    }
 
-     }
     public function edit($id)
     {
         $view =$this->view ;
