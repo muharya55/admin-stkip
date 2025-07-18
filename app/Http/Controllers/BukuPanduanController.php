@@ -37,8 +37,8 @@ class BukuPanduanController extends Controller
         $artikel = BukuPanduan::where('id', $id)->first();
         $validated = $request->validate([
             'nama' => 'nullable|string|max:255', 
-            // 'tahun' => 'nullable|string|max:255', 
-            'tahun' => ['required','digits:4','regex:/^\d{4}$/'],
+            'tahun' => 'nullable|max:4', 
+            // 'tahun' => ['required','digits:4','regex:/^\d{4}$/'],
             'nama_file' => 'required|file|mimes:pdf,doc,docx,xlsx,jpg,jpeg,png|max:5120',
         ]);
         $file = $request->file('nama_file');
@@ -81,6 +81,7 @@ class BukuPanduanController extends Controller
         $view =$this->view ;
         $validated = $request->validate([
             'nama' => 'nullable|string|max:255', 
+            'tahun' => 'nullable|max:4', 
             // 'tahun' => ['required','digits:4','regex:/^\d{4}$/'],
             'nama_file' => 'required|file|mimes:pdf,doc,docx,xlsx,jpg,jpeg,png|max:5120',
         ]);
