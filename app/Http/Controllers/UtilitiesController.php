@@ -36,10 +36,21 @@ class UtilitiesController extends Controller
     { 
         $view =$this->view ;
         $artikel = Utilities::where('id', $id)->first();
-        $validated = $request->validate([
-            'slug' => 'nullable|string|max:255', 
-            'data'  => 'nullable|string',
-        ]);
+        $validated = [];
+        if ($artikel->slug !='image-banner') {
+            $validated = $request->validate([
+                'data'  => 'nullable|string',
+            ]);
+        }
+        if ($artikel->slug =='image-banner') {
+            $validated = $request->validate([
+                'image'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            ]);
+            $uniqueName = generateRandomString() . '.Banner' . $request->id;
+            $imagePath = $request->file('image') ? 
+                $request->file('image')->store('banner/'.$uniqueName, 'public') : $artikel->image;
+            $validated['image'] = $imagePath;
+        }
      
         $artikel->update($validated);
         return redirect()->route("$view.index")->with(['success' => 'Data Berhasil Di Edit!']);
@@ -47,13 +58,13 @@ class UtilitiesController extends Controller
     }
     public function edit($id)
     {
-        $view =$this->view ;
-        $fakultas =  Fakultas::select('id','nama','singkatan')->get();
-
+        $view = $this->view ;
+        $arrcheck =  ['image-banner'];
         $data = Utilities::find($id);
+        $check = in_array($data->slug, $arrcheck);
         return view("$view.edit", [
             "data" => $data,
-            "fakultas" => $fakultas
+            "check" => $check
         ]);
     }
    protected function convertRupiahToInt($rupiah)

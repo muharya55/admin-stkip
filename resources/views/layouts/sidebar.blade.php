@@ -139,6 +139,18 @@
                         <span class="item-name">Contact</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('ormawa*') ? 'active' : '' }}" aria-current="page" href="/ormawa">
+                        @include('icons.user-icon')
+                        <span class="item-name">Ormawa</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('ukm*') ? 'active' : '' }}" aria-current="page" href="/ukm">
+                        @include('icons.user-icon')
+                        <span class="item-name">UKM</span>
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link {{ Request::is('kelas') ? 'active' : '' }}" aria-current="page" href="/kelas">
                         @include('icons.house-icon')

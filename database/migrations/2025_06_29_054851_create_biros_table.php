@@ -32,6 +32,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('biros');
+        Schema::dropIfExists('biros'); 
+        //php artisan make:migration add_image_to_utilities_table
     }
 };

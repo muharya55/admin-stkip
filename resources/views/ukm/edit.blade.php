@@ -47,21 +47,17 @@
             <div class="col-md-12">
                <div class="card border-0 shadow rounded">
                   <div class="card-body">
-                    <form action="{{ route('utilities.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('ukm.update', $data->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
-                        @component('components.textInput',['label'=>'Slug ' ,'disabled'=>true,'name'=>'slug','value'=>$data->slug ]) @endcomponent
-                        @if ($data->slug !='image-banner')
-                            @component('components.textArea',['label'=>'Data','name'=>'data','id'=>'editor','value'=>$data->data]) @endcomponent
-                        @endif
-                        @if ($data->slug =='image-banner')
-                          @component('components.fileinput', ['label' => 'Gambar', 'value' => $data->image, 'name' => 'image', 'accept' => 'image/*',"col"=>"col-md-5"]) @endcomponent
-                            <p>Note : gambar Harus tidak Jauh  berbeda dari 1700 x 800 px</p>
-                        @endif
-
+                       
+                        @component('components.textInput', ['label' => 'Nama', 'value' => $data->nama_ukm, 'name' => 'nama_ukm']) @endcomponent
+                    
                         <button type="submit" class="btn btn-primary">
                            Simpan
                         </button>
+
+
                      </form>
                   </div>
                </div>
