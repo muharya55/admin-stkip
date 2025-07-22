@@ -14,18 +14,18 @@ class UtilitiesSeeder extends Seeder
     public function run(): void
     {
         //
-        // Utilities::create([
-        //     'slug' => 'sejarah', 
-        // ]);
-        // Utilities::create([
-        //     'slug' => 'visi-misi', 
-        // ]);
-        // Utilities::create([
-        //     'slug' => 'video-url', 
-        // ]);
-        // Utilities::create([
-        //     'slug' => 'video-content', 
-        // ]);
+        Utilities::create([
+            'slug' => 'sejarah', 
+        ]);
+        Utilities::create([
+            'slug' => 'visi-misi', 
+        ]);
+        Utilities::create([
+            'slug' => 'video-url', 
+        ]);
+        Utilities::create([
+            'slug' => 'video-content', 
+        ]);
         Utilities::create(['slug' => 'image-banner']);
         Utilities::create(['slug' => 'text-banner1']);
         Utilities::create(['slug' => 'text-banner2']);
