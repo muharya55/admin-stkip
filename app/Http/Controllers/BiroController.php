@@ -47,7 +47,7 @@ class BiroController extends Controller
         $data = $request->all();
 
         $imagePath = $request->file('gambar_pimpinan') ? 
-                $request->file('gambar_pimpinan')->store("photos/$view/".$uniqueName, 'public') 
+                $request->file('gambar_pimpinan')->store("photos/$view", 'public') 
                 : $artikel->gambar_pimpinan;        
         $slug = $this->generateSlug($request->nama);
         $data['slug'] = $slug;
@@ -85,7 +85,7 @@ class BiroController extends Controller
         $data['slug'] = $slug;
 
         $imagePath = $request->file('gambar_pimpinan') ? 
-                $request->file('gambar_pimpinan')->store("photos/$view/".$uniqueName, 'public') 
+                $request->file('gambar_pimpinan')->store("photos/$view", 'public') 
                 : $request->gambar_pimpinan;
         $data['gambar_pimpinan'] = $imagePath;  
 

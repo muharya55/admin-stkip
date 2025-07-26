@@ -16,6 +16,7 @@ use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\UkmController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UtilitiesController;
 
 /*
@@ -50,6 +51,7 @@ Route::middleware('auth')->group(
         Route::resource('/ormawa', OrmawaController::class);
         Route::resource('/ukm', UkmController::class);
         Route::resource('/download', DownloadController::class);
+        Route::resource('/user', UserController::class);
         // Route::get('documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');
         // Route::get('/download/{filename}', [SiswaController::class, 'downloadFormatUpload']);
     }

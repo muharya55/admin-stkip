@@ -34,24 +34,40 @@ class UtilitiesController extends Controller
     }
     public function update(Request $request, $id)
     { 
+        
         $view =$this->view ;
         $artikel = Utilities::where('id', $id)->first();
+        $checkiconwithdesc = in_array($artikel->slug,['email-icon','telephone-icon','text-banner1','text-banner2','text-banner3']);
+        $checkicon = in_array($artikel->slug,['whatsapp-icon','gmail-icon','youtube-icon','instagram-icon','facebook-icon']);
+        $check = in_array($artikel->slug, ['image-banner','ormawa-image','ukm-image']);
+
         $validated = [];
-        if ($artikel->slug !='image-banner') {
+        if (!$check&& !$checkiconwithdesc && !$checkicon && $artikel->slug !='location-icon') {
             $validated = $request->validate([
                 'data'  => 'nullable|string',
             ]);
-        }
-        if ($artikel->slug =='image-banner') {
+        } else if ($check) {
             $validated = $request->validate([
                 'image'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             ]);
-            $uniqueName = generateRandomString() . '.Banner' . $request->id;
+            // $uniqueName = generateRandomString() . '.Banner' . $request->id;
             $imagePath = $request->file('image') ? 
-                $request->file('image')->store('banner/'.$uniqueName, 'public') : $artikel->image;
+                $request->file('image')->store('photos/banner', 'public') : $artikel->image;
             $validated['image'] = $imagePath;
+        } else if ($artikel->slug =='location-icon') {
+            $validated = $request->validate([
+                'url'  => 'nullable|string',
+                'deskripsi'  => 'nullable|string',
+            ]);
+        } else if ($checkicon) {
+            $validated = $request->validate([
+                'url'  => 'nullable|string',
+            ]);
+        } else if ($checkiconwithdesc) {
+            $validated = $request->validate([
+                'deskripsi'  => 'nullable|string',
+            ]);
         }
-     
         $artikel->update($validated);
         return redirect()->route("$view.index")->with(['success' => 'Data Berhasil Di Edit!']);
 
@@ -59,12 +75,16 @@ class UtilitiesController extends Controller
     public function edit($id)
     {
         $view = $this->view ;
-        $arrcheck =  ['image-banner'];
+        $arrcheck =  ['image-banner','ormawa-image','ukm-image'];
         $data = Utilities::find($id);
         $check = in_array($data->slug, $arrcheck);
+        $checkiconwithdesc = in_array($data->slug,['email-icon','telephone-icon','text-banner1','text-banner2','text-banner3']);
+        $checkicon = in_array($data->slug,['whatsapp-icon','gmail-icon','youtube-icon','instagram-icon','facebook-icon']);
         return view("$view.edit", [
             "data" => $data,
-            "check" => $check
+            "check" => $check,
+            "checkiconwithdesc" => $checkiconwithdesc,
+            "checkicon" => $checkicon
         ]);
     }
    protected function convertRupiahToInt($rupiah)

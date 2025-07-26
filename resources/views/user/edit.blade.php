@@ -47,32 +47,17 @@
             <div class="col-md-12">
                <div class="card border-0 shadow rounded">
                   <div class="card-body">
-                    <form action="{{ route('utilities.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.update', $data->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
-                        @component('components.textInput',['label'=>'Slug ' ,'disabled'=>true,'name'=>'slug','value'=>$data->slug ]) @endcomponent
-                        @if ($data->slug !='image-banner' && !$check && !$checkiconwithdesc && !$checkicon && $data->slug !='location-icon')
-                            @component('components.textArea',['label'=>'Data','name'=>'data','id'=>'editor','value'=>$data->data]) @endcomponent
-                        @endif
-                        @if ($check)
-                          @component('components.fileinput', ['label' => 'Gambar', 'value' => $data->image, 'name' => 'image', 'accept' => 'image/*',"col"=>"col-md-5"]) @endcomponent
-                            <p>Note : gambar Harus tidak Jauh  berbeda dari 1700 x 800 px</p>
-                        @endif
-
-                        @if ($data->slug == 'location-icon') 
-                            @component('components.textInput',['label'=>'Url ','name'=>'url','value'=>$data->url]) @endcomponent
-                            @component('components.textInput',['label'=>'Deskripsi ' ,'name'=>'deskripsi','value'=>$data->deskripsi]) @endcomponent
-                        @endif
-                        @if ($checkiconwithdesc) 
-                            @component('components.textInput',['label'=>'Deskripsi ' ,'name'=>'deskripsi','value'=>$data->deskripsi]) @endcomponent
-                        @endif
-                        @if ($checkicon) 
-                            @component('components.textInput',['label'=>'Url ','name'=>'url','value'=>$data->url]) @endcomponent
-                        @endif
-
+                        @component('components.textInput',['label'=>'Username','name'=>'name','value' => $data->name]) @endcomponent
+                        @component('components.textInput',['label'=>'Password','name'=>'password','type'=>'text']) @endcomponent 
+                     
                         <button type="submit" class="btn btn-primary">
                            Simpan
                         </button>
+
+
                      </form>
                   </div>
                </div>

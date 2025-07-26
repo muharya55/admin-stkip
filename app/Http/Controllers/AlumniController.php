@@ -33,12 +33,10 @@ class AlumniController extends Controller
         return Str::slug($judul, '-');
     }
     public function update(Request $request, $id)
-    {
-        // dd($request->file('image'));
+    { 
         $view =$this->view ;
         $artikel = Alumni::where('id', $id)->first();
 
-       
         $request->validate([
             'nama' => 'nullable|string|max:255',
             'jabatan' => 'nullable|string|max:255',
@@ -46,19 +44,15 @@ class AlumniController extends Controller
             'gambar' => 'nullable|image|max:2048',
         ]);
 
-
-        $uniqueName = generateRandomString() . '.' . $request->nama;
-
         $sendata = $request->all();
-
     
         $imagePath = $request->file('gambar') ? 
-                $request->file('gambar')->store("photos/$view".$uniqueName, 'public') : $artikel->gambar;
+                $request->file('gambar')->store("photos/alumni", 'public') : $artikel->gambar;
         $sendata['gambar'] = $imagePath;
 
         $artikel->update($sendata);
 
-         return redirect()->route("$view.index")->with(['success' => 'Data Berhasil Di Edit!']);
+        return redirect()->route("$view.index")->with(['success' => 'Data Berhasil Di Edit!']);
 
     }
     public function edit($id)
@@ -79,11 +73,10 @@ class AlumniController extends Controller
             'gambar' => 'nullable|image|max:2048',
         ]);
 
-        $uniqueName = generateRandomString() . '.' . $request->nama;
-
+ 
         $sendata = $request->all();
         $imagePath = $request->file('gambar') ? 
-                $request->file('gambar')->store("photos/".$uniqueName, 'public') : $request->gambar;
+                $request->file('gambar')->store("photos/alumni", 'public') : $request->gambar;
         $sendata['gambar'] = $imagePath;
         try {
             Alumni::create($sendata);

@@ -40,10 +40,9 @@ class GaleriController extends Controller
             'gambar'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $uniqueName = generateRandomString() . '.' . $request->deskripsi;
-
+ 
         $imagePath = $request->file('gambar') ? 
-                $request->file('gambar')->store("photos/$view".$uniqueName, 'public') : $artikel->gambar;
+                $request->file('gambar')->store("photos/$view", 'public') : $artikel->gambar;
         $artikel->update([
                 'deskripsi'     => $request->deskripsi, 
                 'gambar'     =>  $imagePath, 
@@ -68,11 +67,10 @@ class GaleriController extends Controller
             'gambar'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $uniqueName = generateRandomString() . '.' . $request->deskripsi;
-
+ 
        
         $imagePath = $request->file('gambar') ? 
-                $request->file('gambar')->store("photos/$view/".$uniqueName, 'public') : $request->gambar;
+                $request->file('gambar')->store("photos/$view", 'public') : $request->gambar;
                  
         try {
             Galeri::create([

@@ -151,6 +151,14 @@
                         <span class="item-name">UKM</span>
                     </a>
                 </li>
+                @if (Auth::user()->name =='admin')
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('user*') ? 'active' : '' }}" aria-current="page" href="/user">
+                            @include('icons.user-icon')
+                            <span class="item-name">User</span>
+                        </a>
+                    </li>
+                @endif
                 {{-- <li class="nav-item">
                     <a class="nav-link {{ Request::is('kelas') ? 'active' : '' }}" aria-current="page" href="/kelas">
                         @include('icons.house-icon')

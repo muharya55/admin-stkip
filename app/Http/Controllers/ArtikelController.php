@@ -40,10 +40,9 @@ class ArtikelController extends Controller
             'kategori' => 'required',
         ]);
 
-        $uniqueName = generateRandomString() . '.' . $request->judul;
 
         $imagePath = $request->file('image') ? 
-                $request->file('image')->store('photos/'.$uniqueName, 'public') : $artikel->image;
+                $request->file('image')->store('photos/artikel', 'public') : $artikel->image;
  
         $slug = $this->generateSlug($request->judul);
         $artikel->update([
@@ -74,10 +73,9 @@ class ArtikelController extends Controller
             'kategori' => 'required',
         ]);
 
-        $uniqueName = generateRandomString() . '.' . $request->judul;
-
+ 
         $imagePath = $request->file('image') ? 
-                $request->file('image')->store('photos/'.$uniqueName, 'public') : null;
+                $request->file('image')->store('photos/artikel', 'public') : null;
  
         $slug = $this->generateSlug($request->judul);
         try {
