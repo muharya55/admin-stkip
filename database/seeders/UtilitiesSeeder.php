@@ -13,7 +13,7 @@ class UtilitiesSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        //a
         // Utilities::create(['slug' => 'sejarah']);
         // Utilities::create(['slug' => 'visi-misi']);
         // Utilities::create(['slug' => 'video-url']);
