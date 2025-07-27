@@ -18,10 +18,10 @@ class UtilitiesSeeder extends Seeder
         // Utilities::create(['slug' => 'visi-misi']);
         // Utilities::create(['slug' => 'video-url']);
         // Utilities::create(['slug' => 'video-content']);
-        Utilities::create(['slug' => 'image-banner']);
-        Utilities::create(['slug' => 'text-banner1']);
-        Utilities::create(['slug' => 'text-banner2']);
-        Utilities::create(['slug' => 'text-banner3']);
+        // Utilities::create(['slug' => 'image-banner']);
+        // Utilities::create(['slug' => 'text-banner1']);
+        // Utilities::create(['slug' => 'text-banner2']);
+        // Utilities::create(['slug' => 'text-banner3']);
         // Utilities::create(['slug' => 'ukm-content']);
         // Utilities::create(['slug' => 'ukm-image']); 
         // Utilities::create(['slug' => 'whatsapp-icon']); 
@@ -33,5 +33,6 @@ class UtilitiesSeeder extends Seeder
         // Utilities::create(['slug' => 'telephone-icon']); 
         // Utilities::create(['slug' => 'ormawa-image']); 
         // Utilities::create(['slug' => 'ormawa-text']); 
+        Utilities::create(['slug' => 'location-icon']); 
     }
 }
