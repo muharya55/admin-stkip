@@ -93,10 +93,7 @@ class ArtikelController extends Controller
         }
         return redirect()->route('artikel.index')->with(['success' => 'Data Berhasil Ditambah!']);
     }
-    public function show($id)
-    {
-        //
-    }
+     
     public function destroy(Request $request, $id)
     {
         $item = Artikel::findOrFail($id);

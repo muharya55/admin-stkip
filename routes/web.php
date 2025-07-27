@@ -37,21 +37,21 @@ Route::get('/', function () {
 Route::middleware('auth')->group(
     function () {
         Route::resource('/home', HomeController::class);
-        Route::resource('/artikel', ArtikelController::class);
-        Route::resource('/alumni', AlumniController::class);
-        Route::resource('/struktur-organisasi', StrukturOrganisasiController::class);
-        Route::resource('/galeri', GaleriController::class);
-        Route::resource('/biro', BiroController::class);
-        Route::resource('/prodi', ProdiController::class);
-        Route::resource('/fakultas', FakultasController::class);
-        Route::resource('/kalender-akademik', KalenderAkademikController::class);
-        Route::resource('/buku-panduan', BukuPanduanController::class);
-        Route::resource('/utilities', UtilitiesController::class);
-        Route::resource('/contact', ContactController::class);
-        Route::resource('/ormawa', OrmawaController::class);
-        Route::resource('/ukm', UkmController::class);
-        Route::resource('/download', DownloadController::class);
-        Route::resource('/user', UserController::class);
+        Route::resource('/artikel', ArtikelController::class)->except(['show']);
+        Route::resource('/alumni', AlumniController::class)->except(['show']);
+        Route::resource('/struktur-organisasi', StrukturOrganisasiController::class)->except(['show']);
+        Route::resource('/galeri', GaleriController::class)->except(['show']);
+        Route::resource('/biro', BiroController::class)->except(['show']);
+        Route::resource('/prodi', ProdiController::class)->except(['show']);
+        Route::resource('/fakultas', FakultasController::class)->except(['show']);
+        Route::resource('/kalender-akademik', KalenderAkademikController::class)->except(['show']);
+        Route::resource('/buku-panduan', BukuPanduanController::class)->except(['show']);
+        Route::resource('/utilities', UtilitiesController::class)->except(['show']);
+        Route::resource('/contact', ContactController::class)->except(['show']);
+        Route::resource('/ormawa', OrmawaController::class)->except(['show']);
+        Route::resource('/ukm', UkmController::class)->except(['show']);
+        Route::resource('/download', DownloadController::class)->except(['show']);
+        Route::resource('/user', UserController::class)->except(['show']);
         //aa
         // Route::get('documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');
         // Route::get('/download/{filename}', [SiswaController::class, 'downloadFormatUpload']);
