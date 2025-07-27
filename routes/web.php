@@ -52,6 +52,7 @@ Route::middleware('auth')->group(
         Route::resource('/ukm', UkmController::class);
         Route::resource('/download', DownloadController::class);
         Route::resource('/user', UserController::class);
+        //aa
         // Route::get('documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');
         // Route::get('/download/{filename}', [SiswaController::class, 'downloadFormatUpload']);
     }
