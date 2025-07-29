@@ -53,6 +53,9 @@
                         @csrf
                    
                         @component('components.textInput',['label'=>'Nama' ,'name'=>'nama' ]) @endcomponent 
+                        @component('components.fileinput',['label'=>'Gambar ',"name"=>"image","accept"=>"image/*","col"=>"col-md-5"]) @endcomponent
+                        @component('components.textArea',['label'=>'Konten' ,'name'=>'content','id'=>'editor'  ]) @endcomponent
+                         
                         @component('components.select',['label'=>'Fakultas','name'=>'fakultas_id','isupdate'=>true ,"type"=>"obj" ,'key1'=>'id','key2'=>'nama','key3'=>'singkatan', "options"=>$fakultas])
                         @endcomponent
                         @for ($i = 1; $i <= 8; $i++)

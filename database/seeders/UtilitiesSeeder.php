@@ -33,6 +33,8 @@ class UtilitiesSeeder extends Seeder
         // Utilities::create(['slug' => 'telephone-icon']); 
         // Utilities::create(['slug' => 'ormawa-image']); 
         // Utilities::create(['slug' => 'ormawa-text']); 
-        Utilities::create(['slug' => 'location-icon']); 
+        // Utilities::create(['slug' => 'location-icon']); 
+        Utilities::create(['slug' => 'komunitas-image']); 
+        Utilities::create(['slug' => 'komunitas-text']); 
     }
 }

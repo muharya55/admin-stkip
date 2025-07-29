@@ -52,10 +52,13 @@
                         @method('PATCH')
                          
                         @component('components.textInput',['label'=>'Nama' ,'name'=>'nama','value'=>$data->nama ]) @endcomponent 
-
+              
+                        @component('components.fileinput',['label'=>'Gambar ','value'=>$data->image,"name"=>"image","accept"=>"image/*","col"=>"col-md-5"]) @endcomponent
+                        @component('components.textArea',['label'=>'Konten' ,'value'=>$data->content,'name'=>'content','id'=>'editor'  ]) @endcomponent
                         @component('components.select',['label'=>'Fakultas','name'=>'fakultas_id',
                         'value'=>$data->fakultas_id,'isupdate'=>true ,"type"=>"obj" ,'key1'=>'id','key2'=>'nama','key3'=>'singkatan', "options"=>$fakultas])
                         @endcomponent
+
 
                         @for ($i = 1; $i <= 8; $i++)
                             @component('components.textInput', ['label' => ' UKT ' . $i,'name' => 'ukt' . $i,'value' => $data->{'ukt' . $i}])
@@ -77,7 +80,22 @@
 @endsection
 
 @push('script')
- 
+ <script>
+      $('#editor').summernote({
+        placeholder: 'Silahkan Masukkan Konten',
+        tabsize: 2,
+        height: 320,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    </script>
 <script>
     $('.tombolHapus').click(function() {
         var id = $(this).data('id');

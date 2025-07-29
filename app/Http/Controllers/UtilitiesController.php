@@ -39,7 +39,7 @@ class UtilitiesController extends Controller
         $artikel = Utilities::where('id', $id)->first();
         $checkiconwithdesc = in_array($artikel->slug,['email-icon','telephone-icon','text-banner1','text-banner2','text-banner3']);
         $checkicon = in_array($artikel->slug,['whatsapp-icon','gmail-icon','youtube-icon','instagram-icon','facebook-icon']);
-        $check = in_array($artikel->slug, ['image-banner','ormawa-image','ukm-image']);
+        $check = in_array($artikel->slug, ['image-banner','ormawa-image','ukm-image','komunitas-image']);
 
         $validated = [];
         if (!$check&& !$checkiconwithdesc && !$checkicon && $artikel->slug !='location-icon') {
@@ -75,7 +75,7 @@ class UtilitiesController extends Controller
     public function edit($id)
     {
         $view = $this->view ;
-        $arrcheck =  ['image-banner','ormawa-image','ukm-image'];
+        $arrcheck =  ['image-banner','ormawa-image','ukm-image','komunitas-image'];
         $data = Utilities::find($id);
         $check = in_array($data->slug, $arrcheck);
         $checkiconwithdesc = in_array($data->slug,['email-icon','telephone-icon','text-banner1','text-banner2','text-banner3']);

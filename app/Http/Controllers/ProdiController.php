@@ -34,12 +34,25 @@ class ProdiController extends Controller
     {   
         return Str::slug($judul, '-');
     }
+    protected function normalizeRupiahValue($value)
+    {
+        // Jika diakhiri dengan .00, hapus .00
+        if (substr($value, -3) === '.00') {
+            $value = substr($value, 0, -3);
+        }
+
+        // Lanjutkan konversi ke integer
+        return $this->convertRupiahToInt($value);
+    }
+
     public function update(Request $request, $id)
     {
         $view =$this->view ;
         $artikel = Jurusan::where('id', $id)->first();
         $validated = $request->validate([
-            'nama' => 'nullable|string|max:255',
+            'nama' => 'required|string|max:255',
+            'image'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'content'  => 'nullable|string',
             'fakultas_id' => 'nullable',
             'ukt1' => 'nullable|string',
             'ukt2' => 'nullable|string',
@@ -51,13 +64,24 @@ class ProdiController extends Controller
             'ukt8' => 'nullable|string',
         ]);
 
+        $imagePath = $request->file('image') ? 
+                $request->file('image')->store('photos/prodi', 'public') : $artikel->image;
+ 
+        $slug = $this->generateSlug($request->nama);
         // Ubah nilai UKT jadi integer
+       
         for ($i = 1; $i <= 8; $i++) {
             $key = "ukt{$i}";
-            $validated[$key] = isset($validated[$key])
-                ? $this->convertRupiahToInt($validated[$key])
-                : 0;
+
+            if (isset($validated[$key])) {
+                $validated[$key] = $this->normalizeRupiahValue($validated[$key]);
+            } else {
+                $validated[$key] = 0;
+            }
         }
+
+        $validated['slug'] = $slug;
+        $validated['image'] = $imagePath;
         $artikel->update($validated);
          return redirect()->route("$view.index")->with(['success' => 'Data Berhasil Di Edit!']);
 
@@ -90,6 +114,8 @@ class ProdiController extends Controller
         $view =$this->view ;
         $validated = $request->validate([
             'nama' => 'nullable|string|max:255',
+            'image'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'content'  => 'required|string',
             'fakultas_id' => 'nullable|integer',
             'ukt1' => 'nullable|string',
             'ukt2' => 'nullable|string',
@@ -101,14 +127,24 @@ class ProdiController extends Controller
             'ukt8' => 'nullable|string',
         ]);
 
+        
+        $imagePath = $request->file('image') ? 
+                $request->file('image')->store('photos/prodi', 'public') : null;
+ 
+        $slug = $this->generateSlug($request->judul);
         // Ubah nilai UKT jadi integer
         for ($i = 1; $i <= 8; $i++) {
             $key = "ukt{$i}";
-            $validated[$key] = isset($validated[$key])
-                ? $this->convertRupiahToInt($validated[$key])
-                : 0;
+
+            if (isset($validated[$key])) {
+                $validated[$key] = $this->normalizeRupiahValue($validated[$key]);
+            } else {
+                $validated[$key] = 0;
+            }
         }
 
+        $validated['slug'] = $slug;
+        $validated['image'] = $imagePath;
         try {
             Jurusan::create($validated);
         } catch (Exception $e) {
